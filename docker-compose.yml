@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      - "POSTGRES_DB=backend"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=0000"
+    ports:
+      - "127.17.0.2:5432:5432"
+    volumes:
+      - C:/bzu/WebServices/docker/data/postgres:/var/lib/postgresql/data
+
+  app:
+    image: 'rest-api:latest'
+    container_name: rest-api
+    depends_on:
+      - postgres
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/backend
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=0000
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SERVER_PORT=9000
+    ports:
+      - "127.0.0.1:9000:8080"

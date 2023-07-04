@@ -81,6 +81,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>webservice</finalName>
 	</build>
 
 </project>
